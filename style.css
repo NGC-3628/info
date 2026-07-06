@@ -206,7 +206,7 @@ body {
 a.physics-item { text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
 
 /* LinkedIn y GitHub son los enlaces que más importan, así que son más
-   grandes y usan fondo blanco / texto negro para resaltar sobre el resto. */
+   grandes y usan fondo blanco / texto negro para resaltar sobre el resto. yeiii*/
 .physics-item.featured {
     background: #ffffff;
     color: #111111;
