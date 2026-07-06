@@ -1,5 +1,4 @@
-// Si el CDN de Matter.js no cargó, mostramos el aviso y detenemos el script aquí
-// (los enlaces de <nav class="fallback-links"> siguen funcionando sin JS de física).
+// si CDN no carga, do valida
 if (typeof Matter === 'undefined') {
     const errorBox = document.getElementById('cdn-error');
     if (errorBox) errorBox.hidden = false;
@@ -92,6 +91,32 @@ window.addEventListener('load', () => {
 
     Composite.add(world, mouseConstraint);
 
+    // botones clickeables en celulares y tablets
+    document.querySelectorAll('a.physics-item').forEach(link => {
+        let startX = 0;
+        let startY = 0;
+
+        link.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        link.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            
+            const diffX = Math.abs(endX - startX);
+            const diffY = Math.abs(endY - startY);
+
+            // Tap en lugar de arrastre
+            if (diffX < 10 && diffY < 10) {
+                e.preventDefault(); 
+                const target = link.getAttribute('target') || '_self';
+                window.open(link.href, target);
+            }
+        });
+    });
+
     // Ciclo de animación principal: Sincronizar el CSS de los elementos con Matter.js
     Events.on(engine, 'afterUpdate', () => {
         physicsBodies.forEach((body) => {
@@ -103,7 +128,6 @@ window.addEventListener('load', () => {
             el.style.transform = `translate(${x - el.offsetWidth / 2}px, ${y - el.offsetHeight / 2}px) rotate(${angle}rad)`;
 
             // Revelar la burbuja solo una vez que ya tiene una posición real
-            // (evita el "flash" de todas apiladas en la esquina superior izquierda)
             if (!el.classList.contains('is-ready')) {
                 el.classList.add('is-ready');
             }
@@ -122,17 +146,15 @@ window.addEventListener('load', () => {
 });
 
 // Ajustar paredes dinámicamente si el usuario cambia el tamaño de la ventana
-// (con debounce para no reconstruir la física en cada pixel mientras se arrastra el borde)
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(createWalls, 150);
 });
 
-// OPTIONAL: Activar inclinación usando giroscopio en móviles (Soporte Acelerómetro)
+// OPTIONAL: Activar inclinación usando giroscopio en móviles
 function handleDeviceOrientation(event) {
     if (event.beta !== null && event.gamma !== null) {
-        // Normalizar los valores para cambiar la dirección de la gravedad de Matter.js
         const gravityX = Math.min(Math.max(event.gamma / 30, -1), 1);
         const gravityY = Math.min(Math.max(event.beta / 30, -1), 1);
         engine.gravity.x = gravityX;
@@ -142,9 +164,6 @@ function handleDeviceOrientation(event) {
 
 const tiltButton = document.getElementById('tilt-button');
 
-// iOS 13+ Safari exige que deviceorientation se active desde un gesto del usuario
-// (un simple addEventListener nunca dispara eventos ahí). En cualquier otro
-// navegador (Android, desktop) activamos la inclinación directamente.
 if (typeof DeviceOrientationEvent !== 'undefined' &&
     typeof DeviceOrientationEvent.requestPermission === 'function') {
     if (tiltButton) {
