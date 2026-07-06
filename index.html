@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaac Iturralde - Portfolio</title>
+    <meta name="description" content="Isaac Iturralde — Full-Stack Software Engineer especializado en Java/Spring Boot, Python, PHP/Laravel y Node.js.">
+    <meta property="og:title" content="Isaac Iturralde - Full-Stack Software Engineer">
+    <meta property="og:description" content="Portfolio interactivo con física de burbujas: Java/Spring Boot, Python, PHP/Laravel, Node.js.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230f1115' stroke='%2310b981' stroke-width='6'/%3E%3Ctext x='50' y='65' font-size='55' text-anchor='middle' fill='%23f3f4f6' font-family='sans-serif'%3EI%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"
+        onerror="document.getElementById('cdn-error').hidden=false;"></script>
+</head>
+<body>
+
+    <div id="static-background">
+        <h1 class="bg-name">Isaac Iturralde</h1>
+        <h2 class="bg-position">Full-Stack Software Engineer</h2>
+    </div>
+
+    <!-- enlaces paramount--> 
+    <nav class="fallback-links" aria-label="Enlaces de contacto">
+        <a href="https://www.linkedin.com/in/isaac-iturralde/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/NGC-3628" target="_blank" rel="noopener">GitHub</a>
+        <a href="isaac.iturralde.p@gmail.com">Contacto</a>
+    </nav>
+
+    <div id="canvas-container"></div>
+
+    <div id="physics-wrapper">
+        <div class="physics-item clock" id="clock-bubble" aria-hidden="true">
+            <span id="clock-time">00:00:00</span>
+        </div>
+
+        <div class="physics-item tag tag-java">Azure</div>
+        <div class="physics-item tag tag-python">Python & Computer vision</div>
+        <div class="physics-item tag tag-laravel">PHP / Laravel</div>
+        <div class="physics-item tag tag-laravel">EC2 / S3 / Cloudfront</div>
+        <div class="physics-item tag tag-js">Node.js</div>
+        <div class="physics-item tag tag-js">Stripe</div>
+
+        <div class="physics-item project">Zento Marketplace</div>
+        <div class="physics-item project">Tacostomi System</div>
+        <div class="physics-item project">Homework control at IETG</div>
+
+        <!-- Decorativos: los enlaces reales y accesibles están en <nav class="fallback-links"> arriba -->
+        <a href="https://www.linkedin.com/in/isaac-iturralde/" target="_blank" rel="noopener" class="physics-item btn btn-linkedin featured" tabindex="-1" aria-hidden="true">LinkedIn</a>
+        <a href="https://github.com/NGC-3628" target="_blank" rel="noopener" class="physics-item btn btn-github featured" tabindex="-1" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="56" height="56" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+    </div>
+
+    <button id="tilt-button" type="button" hidden>Activar inclinación 🎯</button>
+
+    <div id="cdn-error" role="alert" hidden>
+        No se pudo cargar el motor de física. Los enlaces siguen disponibles arriba.
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
